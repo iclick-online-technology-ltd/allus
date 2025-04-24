@@ -16,7 +16,7 @@ class EventController extends Controller
 
     public function eventDetails($id)
     {
-        $event = Event::with(['eventUser'])->find($id);
+        $event = Event::with(['user'])->find($id);
 
         return view('pages.event.view-event', compact('event'));
     }

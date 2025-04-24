@@ -23,15 +23,15 @@
                 <tbody>
                 @foreach($members as $member)
                     <tr>
-                        <td>{{$event['username']}}</td>
-                        <td>{{$event['email']}}</td>
-                        <td>{{$event['Gender']}}</td>
+                        <td>{{ucfirst($member['username'])}}</td>
+                        <td>{{$member['email']}}</td>
+                        <td>{{ucfirst($member['gender'])}}</td>
                         <td>
-                            @if($event['status'] == 'active')
+                            @if($member['status'] == 'active')
                                 <span class="badge rounded-pill bg-label-success">Active</span>
-                            @elseif($event['status'] == 'approved')
+                            @elseif($member['status'] == 'approved')
                                 <span class="badge rounded-pill bg-label-primary">Approved</span>
-                            @elseif($event['status'] == 'blocked')
+                            @elseif($member['status'] == 'blocked')
                                 <span class="badge rounded-pill bg-label-danger">Blocked</span>
                             @else
                                 <span class="badge rounded-pill bg-label-warning">Deleted</span>
@@ -40,7 +40,7 @@
                         </td>
 
                         <td>
-                            <a href="{{route('event.view',  $event['id'])}}"
+                            <a href="{{route('member-profile.view',$member['id'])}}"
                                title="View"
                                class="btn btn-sm btn-text-secondary rounded-pill btn-icon">
                                 <i class="mdi mdi-eye-arrow-right-outline" style="color: #0a14ad;"></i>
@@ -59,9 +59,19 @@
             $('#event_list').DataTable(
                 {
                     dom: '<"d-flex justify-content-between"lf>rtip',
-                    buttons: []
+                    columns: [
+                        {width: '20%'},
+                        {width: '20%'},
+                        {width: '20%'},
+                        {width: '20%'},
+                        {width: '20%'},
+                    ]
                 }
             );
+            $('#event_list th, #event_list td').css({
+                'vertical-align': 'middle',
+                'text-align': 'center'
+            });
 
         });
 

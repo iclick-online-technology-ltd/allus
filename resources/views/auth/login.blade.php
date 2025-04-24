@@ -12,7 +12,7 @@
                         @csrf
                         <div class="d-flex flex-column gap-4 bg-white shadow rounded p-4 mb-4">
                             <div class="text-center">
-                                <img class="img-fluid" src="{{ asset('assets/img/haloguard.png') }}" alt="logo">
+                                <img class="img-fluid" src="{{ asset('assets/img/allus-logo.png') }}" alt="logo">
 
                             </div>
                             @error('inactive')
