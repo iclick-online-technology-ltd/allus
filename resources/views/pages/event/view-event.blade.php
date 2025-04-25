@@ -60,10 +60,12 @@
                         <div class="col-md-6 text-center text-md-end">
                             <div class="d-flex align-items-center gap-3">
                                 <button class="btn btn-primary flex-grow-1"
-                                        onclick="changeStatus('{{$event->id}}','approved')">Approve
+                                        onclick="changeStatus('{{$event->id}}','{{App\Enum\EventStatus::APPROVED->value}}')" {{$event->status === App\Enum\EventStatus::APPROVED->value ? 'disabled' : ''}}>
+                                    Approve
                                 </button>
                                 <button class="btn btn-danger flex-grow-1"
-                                        onclick="changeStatus('{{$event->id}}','rejected')">Reject
+                                        onclick="changeStatus('{{$event->id}}','{{App\Enum\EventStatus::REJECTED->value}}')" {{$event->status === App\Enum\EventStatus::REJECTED->value ? 'disabled' : ''}}>
+                                    Reject
                                 </button>
                             </div>
                         </div>
@@ -104,6 +106,13 @@
                                             class="badge fw-normal text-bg-light rounded">{{ucfirst(str_replace('_', ' ', $key)). ' : '.ucfirst(str_replace('_', ' ', $filter)) }}</span>
                                     @endif
                                 @endforeach
+                            </div>
+                        </div>
+                        <div class="info-row mb-4">
+                            <div class="info-label">Status</div>
+                            <div class="info-value">
+                                <span
+                                    class="badge {{ $event->status === App\Enum\EventStatus::APPROVED->value ? 'bg-label-success' : 'bg-label-danger' }}">{{ucfirst($event->status)}}
                             </div>
                         </div>
                     </div>
