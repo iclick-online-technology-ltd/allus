@@ -52,9 +52,9 @@
                         </div>
                     </form>
                     <p class="text-center mb-0">
-                        &copy; <?php echo date('Y') ?> Allus. Crafted by <a href="https://iclick.co.nz"
-                                                                            target="_blank" rel="noopener"
-                                                                            class="footer-link text-primary">Iclick
+                        &copy; <?php echo date('Y') ?> Herdle. Crafted by <a href="https://iclick.co.nz"
+                                                                             target="_blank" rel="noopener"
+                                                                             class="footer-link text-primary">Iclick
                             Online Technology Ltd.</a>
                     </p>
                 </div>
