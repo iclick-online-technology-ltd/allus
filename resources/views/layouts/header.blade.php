@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon_haloguard.ico')}}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/herdle-favicon.png')}}"/>
     <!-- Progress Bar-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>

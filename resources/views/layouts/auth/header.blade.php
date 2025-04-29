@@ -8,7 +8,7 @@
     <title>@yield('title' ?? '') - {{  config('app.name', 'Herdle') }}</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon_haloguard.ico')}}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/herdle-favicon.png')}}"/>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

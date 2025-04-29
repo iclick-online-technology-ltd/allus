@@ -1,6 +1,11 @@
 @extends('layouts.auth.app')
 @section('title', 'Login')
 @section('content')
+    <style>
+        .image_width {
+            max-width: 85%;
+        }
+    </style>
     <div class="vh-100 vw-100 d-flex align-items-center justify-content-center ic-auth-page">
 
         <div class="container">
@@ -12,7 +17,8 @@
                         @csrf
                         <div class="d-flex flex-column gap-4 bg-white shadow rounded p-4 mb-4">
                             <div class="text-center">
-                                <img class="img-fluid" src="{{ asset('assets/img/allus-logo.png') }}" alt="logo">
+                                <img class="img-fluid image_width" src="{{ asset('assets/img/herdle.png') }}"
+                                     alt="logo">
 
                             </div>
                             @error('inactive')

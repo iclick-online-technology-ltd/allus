@@ -1,5 +1,16 @@
 @extends('layouts.app')
 @section('content')
+    <style>
+        #statusFilter {
+            min-width: 160px;
+
+        }
+
+        #member_list_length {
+            width: 100%;
+        }
+
+    </style>
     <div class="card mb-4">
         <div class="card-body">
             <h5 class="text-uppercase mb-0"><span class="text-muted">Members</span> <span class="mx-2">/</span> All
@@ -9,7 +20,7 @@
 
     <div class="card">
         <div class="card-datatable table-responsive">
-            <table id="event_list" class="table table-striped" style="width:100%">
+            <table id="member_list" class="table table-striped" style="width:100%">
                 <thead>
                 <tr>
 
@@ -56,24 +67,43 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            $('#event_list').DataTable(
-                {
-                    dom: '<"d-flex justify-content-between"lf>rtip',
-                    columns: [
-                        {width: '20%'},
-                        {width: '20%'},
-                        {width: '20%'},
-                        {width: '20%'},
-                        {width: '20%'},
-                    ]
-                }
-            );
-            $('#event_list th, #event_list td').css({
-                'vertical-align': 'middle',
-                'text-align': 'center'
+            var table = $('#member_list').DataTable({
+                dom: '<"d-flex justify-content-end align-items-center me-2"lf<"ml-2 status-filter-container">>rtip',
+                columns: [
+                    {width: '20%'},
+                    {width: '20%'},
+                    {width: '20%'},
+                    {width: '20%'},
+                    {width: '20%'},
+                ]
             });
 
+            // Add status filter dropdown after the search box
+            $('.status-filter-container').html(`
+                    <select id="statusFilter" class="form-select">
+                        <option value="">All Statuses</option>
+                        <option value="Active">Active</option>
+                        <option value="Blocked">Blocked</option>
+                    </select>
+                `);
+
+            // Custom filtering function for status
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var selectedStatus = $('#statusFilter').val();
+                var status = data[3]; // Status is in the 4th column (index 3)
+
+                // If no status is selected or the status matches, return true
+                if (selectedStatus === "" || status.includes(selectedStatus)) {
+                    return true;
+                }
+                return false;
+            });
+            // Trigger search when status filter changes
+            $('#statusFilter').on('change', function () {
+                table.draw();
+            });
         });
+
 
     </script>
 

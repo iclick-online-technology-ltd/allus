@@ -1,7 +1,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme bg-white shadow">
     <div class="app-brand mt-3">
-        <a href="./dashboard" class="app-brand-link">
-            <img src="{{asset('assets/img/allus-logo.png')}}" alt="logo" class="img-fluid ic-site-logo">
+        <a href="{{(route('dashboard.index'))}}" class="app-brand-link">
+            <img src="{{asset('assets/img/herdle.png')}}" alt="logo" class="img-fluid ic-site-logo">
         </a>
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
