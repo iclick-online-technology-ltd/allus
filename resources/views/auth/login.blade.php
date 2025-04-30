@@ -1,6 +1,11 @@
 @extends('layouts.auth.app')
 @section('title', 'Login')
 @section('content')
+    <style>
+        .image_width {
+            max-width: 85%;
+        }
+    </style>
     <div class="vh-100 vw-100 d-flex align-items-center justify-content-center ic-auth-page">
 
         <div class="container">
@@ -12,7 +17,8 @@
                         @csrf
                         <div class="d-flex flex-column gap-4 bg-white shadow rounded p-4 mb-4">
                             <div class="text-center">
-                                <img class="img-fluid" src="{{ asset('assets/img/haloguard.png') }}" alt="logo">
+                                <img class="img-fluid image_width" src="{{ asset('assets/img/herdle.png') }}"
+                                     alt="logo">
 
                             </div>
                             @error('inactive')
@@ -52,9 +58,9 @@
                         </div>
                     </form>
                     <p class="text-center mb-0">
-                        &copy; <?php echo date('Y') ?> Allus. Crafted by <a href="https://iclick.co.nz"
-                                                                            target="_blank" rel="noopener"
-                                                                            class="footer-link text-primary">Iclick
+                        &copy; <?php echo date('Y') ?> Herdle. Crafted by <a href="https://iclick.co.nz"
+                                                                             target="_blank" rel="noopener"
+                                                                             class="footer-link text-primary">Iclick
                             Online Technology Ltd.</a>
                     </p>
                 </div>

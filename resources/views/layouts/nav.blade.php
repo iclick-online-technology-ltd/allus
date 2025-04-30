@@ -45,10 +45,10 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
-                            <i class="mdi mdi-account-outline me-2"></i>
-                            <span class="align-middle">My Profile</span>
-                        </a>
+                        {{--                        <a class="dropdown-item" href="#">--}}
+                        {{--                            <i class="mdi mdi-account-outline me-2"></i>--}}
+                        {{--                            <span class="align-middle">My Profile</span>--}}
+                        {{--                        </a>--}}
                     </li>
                     <li>
                         <a class="dropdown-item" href="{{route('logout')}}">
