@@ -147,7 +147,7 @@
                                     </td>
                                     <td>{{ $event->host_name }}</td>
                                     <td>{{ \Carbon\Carbon::parse($event->date_time)->format('M d, Y - g:i A') }}</td>
-                                    <td>{{ Str::limit($event->location, 30) }}</td>
+                                    <td>{{ $event->location }}</td>
                                     <td>
                                                                     <span
                                                                         class="badge bg-primary rounded-pill">{{ $event->participant_count }}</span>
