@@ -6,9 +6,9 @@
             class="footer-container d-flex align-items-center justify-content-between py-3 flex-md-row flex-column">
             <div class="mb-2 mb-md-0">
                 <span>
-                    &copy; <?php echo date('Y') ?> Allus. Crafted by <a href="https://iclick.co.nz" target="_blank"
-                                                                        rel="noopener"
-                                                                        class="footer-link text-primary">Iclick Online Technology Ltd.</a>
+                    &copy; <?php echo date('Y') ?> Herdle. Crafted by <a href="https://iclick.co.nz" target="_blank"
+                                                                         rel="noopener"
+                                                                         class="footer-link text-primary">Iclick Online Technology Ltd.</a>
                 </span>
             </div>
         </div>

@@ -1,14 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <style>
-        /*.festival-card {*/
-        /*    max-width: 600px;*/
-        /*    margin: 2rem auto;*/
-        /*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
-        /*    border-radius: 12px;*/
-        /*    overflow: hidden;*/
-        /*}*/
-
         .festival-card .card-img-top {
             height: 200px;
             object-fit: cover;
@@ -44,8 +36,8 @@
     </style>
     <div class="card mb-4">
         <div class="card-body">
-            <h5 class="text-uppercase mb-0"><span class="text-muted">Event</span> <span class="mx-2">/</span> View
-                Event
+            <h5 class="text-uppercase mb-0"><span class="text-muted">Member</span> <span class="mx-2">/</span> View
+                Member
             </h5>
         </div>
     </div>
@@ -60,12 +52,12 @@
                         <div class="col-md-6 text-center text-md-end">
                             <div class="d-flex align-items-center gap-3">
                                 <button class="btn btn-primary flex-grow-1"
-                                        onclick="changeStatus('{{$event->id}}','{{App\Enum\EventStatus::APPROVED->value}}')" {{$event->status === App\Enum\EventStatus::APPROVED->value ? 'disabled' : ''}}>
-                                    Approve
+                                        onclick="changeStatus('{{$member->id}}','{{App\Enum\MemberStatus::ACTIVE->value}}')" {{$member->status === App\Enum\MemberStatus::ACTIVE->value ? 'disabled' : ''}}>{{ucfirst(App\Enum\MemberStatus::ACTIVE->value)}}
+
                                 </button>
                                 <button class="btn btn-danger flex-grow-1"
-                                        onclick="changeStatus('{{$event->id}}','{{App\Enum\EventStatus::REJECTED->value}}')" {{$event->status === App\Enum\EventStatus::REJECTED->value ? 'disabled' : ''}}>
-                                    Reject
+                                        onclick="changeStatus('{{$member->id}}', '{{App\Enum\MemberStatus::BLOCKED->value}}')" {{$member->status === App\Enum\MemberStatus::BLOCKED->value ? 'disabled' : ''}}>
+                                    {{ucfirst(App\Enum\MemberStatus::BLOCKED->value )}}
                                 </button>
                             </div>
                         </div>
@@ -73,46 +65,49 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="p-4 festival-card">
-                        {{--                        <img src="{{$event->image}}" alt="img" class="card-img-top rounded mb-4">--}}
+                        {{--                        <img src="{{$member->profile_photo}}" alt="img" class="card-img-top rounded mb-4">--}}
 
-                        <h1 class="card-title mb-2">{{$event->title}}</h1>
-                        <p class="card-text mb-4">{{$event->description}}</p>
+                        <h1 class="card-title mb-2">{{ucfirst($member->username)}}</h1>
+                        <p class="card-text mb-4">{{$member->about_me}}</p>
 
                         <div class="info-row mb-4">
-                            <div class="info-label">Date</div>
-                            <div class="info-value">{{date('d M Y h:i A', strtotime($event->created_at))}}</div>
+                            <div class="info-label">Looking For</div>
+                            <div class="info-value">{{ucfirst($member->looking_for)}}</div>
                         </div>
-
-                        <div class="info-row mb-4">
-                            <div class="info-label">Location</div>
-                            <div class="info-value">{{$event->location}}</div>
-                        </div>
-
-                        <div class="info-row mb-4">
-                            <div class="info-label">Host</div>
-                            <div class="info-value">{{$event->user->username}}</div>
-                        </div>
-
-                        <div class="info-row mb-4">
-                            <div class="info-label">Filters</div>
-                            <div class="d-flex align-items-center gap-2">
-                                @foreach($event->filters as $key => $filter)
-                                    @if($key === 'tags')
-                                        @continue
-                                    @endif
-                                    @if($filter !== '')
-
-                                        <span
-                                            class="badge fw-normal text-bg-light rounded">{{ucfirst(str_replace('_', ' ', $key)). ' : '.ucfirst(str_replace('_', ' ', $filter)) }}</span>
-                                    @endif
-                                @endforeach
+                        @if(!empty($member->education_level))
+                            <div class="info-row mb-4">
+                                <div class="info-label">Education Level</div>
+                                <div class="info-value">{{$member->education_level}}</div>
                             </div>
-                        </div>
+                        @endif
+                        @if(!empty($member->age))
+                            <div class="info-row mb-4">
+                                <div class="info-label">Age</div>
+                                <div class="info-value">{{$member->age}}</div>
+                            </div>
+                        @endif
+                        @if(!empty($member->gender))
+                            <div class="info-row mb-4">
+                                <div class="info-label">Gender</div>
+                                <div class="info-value">{{$member->gender}}</div>
+                            </div>
+                        @endif
+                        @if(!empty($member['interests']))
+                            <div class="info-row mb-4">
+                                <div class="info-label">Interests</div>
+                                <div class="d-flex align-items-center gap-2">
+                                    @foreach($member->interests as  $interest)
+                                        <span
+                                            class="badge fw-normal text-bg-light rounded">{{ucfirst(str_replace('_', ' ', $interest['name'])) }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
                         <div class="info-row mb-4">
                             <div class="info-label">Status</div>
                             <div class="info-value">
                                 <span
-                                    class="badge {{ $event->status === App\Enum\EventStatus::APPROVED->value ? 'bg-label-success' : 'bg-label-danger' }}">{{ucfirst($event->status)}}
+                                    class="badge {{ $member->status === App\Enum\MemberStatus::ACTIVE->value ? 'bg-label-success' : 'bg-label-danger' }}">{{ucfirst($member->status)}}
                             </div>
                         </div>
                     </div>
@@ -125,15 +120,15 @@
     <script>
         function changeStatus(id, type) {
             const csrfToken = $('meta[name="csrf-token"]').attr('content');
-
+            console.log(id, type)
             // Customize the confirmation message based on the action type
-            let title = type === 'approved' ? "Confirm Approval" : "Confirm Rejection";
-            let text = type === 'approved'
-                ? "Are you sure you want to approve this event?"
-                : "Are you sure you want to reject this event?";
-            let confirmBtnText = type === 'approved'
-                ? "Yes, approve it!"
-                : "Yes, reject it!";
+            let title = type === 'active' ? "Confirm Activation" : "Confirm Blocking";
+            let text = type === 'active'
+                ? "Are you sure you want to active this user?"
+                : "Are you sure you want to block this user?";
+            let confirmBtnText = type === 'active'
+                ? "Yes, active it!"
+                : "Yes, block it!";
 
             Swal.fire({
                 title: title,
@@ -150,7 +145,7 @@
 
                     // If user confirms, proceed with the AJAX call
                     $.ajax({
-                        url: '/event/status/' + id,
+                        url: '/member-profile/status/' + id,
                         type: 'POST',
                         data: formData,
                         dataType: 'json',

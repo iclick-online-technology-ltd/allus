@@ -21,8 +21,8 @@ class Event extends Model
         'filters' => 'array',
     ];
 
-    public function eventUser(): HasOne
+    public function user(): HasOne
     {
-        return $this->hasOne(EventUser::class, 'id', 'host_id');
+        return $this->hasOne(User::class, 'id', 'host_id');
     }
 }
